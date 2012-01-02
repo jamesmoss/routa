@@ -16,5 +16,6 @@ class Match
 	public function __construct($request, $route)
 	{
 		list($this->controller, $this->action) = explode($this->_delimiter, $route->getControllerName());
+		$this->params = $route->getParams();
 	}
 }

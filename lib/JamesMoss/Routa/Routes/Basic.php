@@ -104,7 +104,7 @@ class Basic
 	 * @param $param
 	 * @return array
 	 */
-	public function getParameters()
+	public function getParams()
 	{
 		return $this->_params;
 	}
@@ -120,7 +120,7 @@ class Basic
 		$this->_compiledUrl = str_replace('/', '\/', $this->_url);
 		$this->_compiledUrl = preg_replace_callback(self::PARAMS_REGEX, function($matches) use(&$tokens) {
 			$tokens[] = $matches[1];
-			return '(.*?)';
+			return '([^\/]+?)';
 		}, $this->_compiledUrl);
 		
 		$this->_compiledUrl = '/^'.$this->_compiledUrl.'$/';

@@ -5,9 +5,9 @@ use JamesMoss\Routa\Routes\Basic;
 
 class RouterTest extends PHPUnit_Framework_TestCase
 {
-	 /**
-     * @expectedException InvalidArgumentException
-     */
+	/**
+	* @expectedException InvalidArgumentException
+	*/
 	public function testInvalidHttpMethod()
 	{
 		$r = new Router('/users/list', 'POKE');
@@ -36,9 +36,22 @@ class RouterTest extends PHPUnit_Framework_TestCase
 			->add('/login/recover',	'Account#recoverPassword')
 			->add('/logout',		'Account#logout');
 		$this->assertInstanceOf('JamesMoss\Routa\Match', $result = $router->match());
-
 		$this->assertEquals($result->controller, 'Account');
 		$this->assertEquals($result->action, 'login');
+	}
+
+	public function testBasicRouteWithTokens()
+	{
+		$url = '/user/233/edit';
+		$router = new Router($url);
+		$router
+			->add('/user/:id',		'User#view')
+			->add('/user/:id/edit',	'User#edit');
+		$result = $router->match();
+
+		$this->assertEquals($result->controller, 'User');
+		$this->assertEquals($result->action, 'edit');
+		$this->assertEquals($result->params['id'], '233');
 	}
 }
 ?>
