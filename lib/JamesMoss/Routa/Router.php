@@ -69,18 +69,18 @@ class Router
 			$route = new Routes\Basic($route, $action);
 		}
 
-		$this->_routes[] = $route;
+		$route->add($this->_routes);
 
 		return $this;
 	}
 	
 	/**
-	 * Matches a route against a request
-	 *
-	 * @author James Moss
-	 * @param $param
-	 * @return null
-	 */
+	* Matches a route against a request
+	*
+	* @author James Moss
+	* @param $param
+	* @return null
+	*/
 	public function match()
 	{
 		// Loop over the routes and check each one
@@ -92,7 +92,7 @@ class Router
 
 		return false;
 	}
-
+	
 	protected function isValidHttpMethod($method)
 	{
 		$allowed = explode(',', 'GET,POST,PUT,DELETE,HEAD,TRACE,OPTIONS,CONNECT,PATCH');
