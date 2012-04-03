@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Routa by jamesmoss</title>
+    
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Routa</h1>
+        <p>A lightweight RESTful router component for PHP 5.3+</p>
+        <p class="view"><a href="https://github.com/jamesmoss/routa">View the Project on GitHub <small>jamesmoss/routa</small></a></p>
+        <ul>
+          <li><a href="https://github.com/jamesmoss/routa/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/jamesmoss/routa/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/jamesmoss/routa">Fork On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>Routa</h1>
+
+<p>A RESTful, flexible MVC router component for PHP 5.3+.  Declare rules which route HTTP requests to a controller.</p>
+
+<h2>Do we need another router?</h2>
+
+<p>There's loads of router components so why do we need another? Many of the existing   ones are tightly coupled, poorly written. Routa is built with the following in mind:</p>
+
+<ul>
+<li>RESTful</li>
+<li>Loosely coupled</li>
+<li>Inspired by Ruby on Rails</li>
+<li>Compatible with PHP &gt;= 5.3</li>
+<li>Prefers convention over configuration</li>
+<li>Flexible and extendable</li>
+<li>Automated test suite</li>
+</ul><h2>Installation</h2>
+
+<p>Routa adheres to the <a href="https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md">PSR-0</a> spec. If you have a compatible autoloader place the contents of <code>lib</code> in your vendor directory.</p>
+
+<h2>Basic usage</h2>
+
+<p>Within your code create a new instance of the router class. </p>
+
+<pre><code>$router = new JamesMoss\Routa\Router;
+</code></pre>
+
+<p>This approach automatically uses the current page URL and HTTP method from the $_SERVER super global, it's possible to override this which we'll cover later.</p>
+
+<p>Next add some routes to map URLs to controller names/actions:</p>
+
+<pre><code>$router
+    -&gt;add('/login', 'Account#login')
+    -&gt;add('/profile/:id', 'User#view')
+    -&gt;add('/profile/:id/edit', 'User#edit')
+    -&gt;add('/search/*', 'Products#search');
+</code></pre>
+
+<p>Once all your routes have been declared match your request against them.</p>
+
+<pre><code>if($result = $router-&gt;match()) {
+    // Assuming the url is /profile/432
+    var_dump($result-&gt;controller); // returns 'User'
+    var_dump($result-&gt;action); // returns 'view'
+    var_dump($result-&gt;params); // returns ['id' =&gt; 432]
+    // Load your controller… 
+} else {
+    // Display your 404 page.
+}
+</code></pre>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/jamesmoss">jamesmoss</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><!--<![endif]-->
+  </body>
+</html>
